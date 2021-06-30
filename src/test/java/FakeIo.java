@@ -20,7 +20,7 @@ public class FakeIo implements Io {
     }
 
     public String getMessage() {
-        return outputMessages.remove();
+        return outputMessages.poll();
     }
 
     public void clearOutput() {

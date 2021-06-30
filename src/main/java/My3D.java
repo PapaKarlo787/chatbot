@@ -10,13 +10,14 @@ class My3D extends Menu {
     public final HashMap<String, Function<String, Model>> modelLoad = new HashMap<>();
     public final HashMap<String, BiFunction<String, LinkedList<Model>, Integer>> modelSave = new HashMap<>();
 
-    public My3D() {
+    public My3D(Io cl_) {
         viewer = new Viewer();
         viewer.start();
         modelLoad.put("stl", Stl::load);
         modelLoad.put("obj", Obj::load);
         modelSave.put("stl", Stl::save);
         modelSave.put("obj", Obj::save);
+        cl = cl_;
     }
     
     @Override

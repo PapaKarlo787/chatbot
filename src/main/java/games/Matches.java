@@ -32,7 +32,7 @@ public class Matches {
             return false;
         }
         if (getNum(input)) {
-            message = "wrong number\n";
+            message = "wrong number \n";
             return true;
         }
         count -= num;
@@ -52,7 +52,7 @@ public class Matches {
         if (machNum == 0) {
             machNum = 1 + rnd.nextInt(max);
         }
-        message = "Machine step: " + machNum + "\n";
+        message = "Machine step: " + machNum + " \n";
         count -= machNum;
         return count < 1;
     }

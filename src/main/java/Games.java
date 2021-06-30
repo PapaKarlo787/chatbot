@@ -2,6 +2,10 @@ import games.Matches;
 
 class Games extends Menu
 {
+    public Games(Io cl_) {
+        cl = cl_;
+    }
+
     @Override
     public void putHelps() {
         helps.add("Игровое меню\nВы можете сыграть:");

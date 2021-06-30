@@ -22,17 +22,17 @@ public class MainChatBot extends Menu {
     }
 
     private void auths() {
-        cl.print("Authors:\n    Papa Karlo");
+        cl.print("Authors:\n    PapaKarlo787");
     }
 
     @Override
     public void putCommands() {
         commands.put("echo", s -> cl.print(String.join(" ", s)));
         commands.put("authors", s -> auths());
-        commands.put("games", s -> (new Games()).main(s));
+        commands.put("games", s -> (new Games(cl)).main(s));
         commands.put("run", s -> run(String.join(" ", s)));
         commands.put("date", s -> cl.print(new Date()));
-        commands.put("3d", s -> (new My3D()).main(s));
+        commands.put("3d", s -> (new My3D(cl)).main(s));
     }
 
     @Override
