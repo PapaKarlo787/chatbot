@@ -10,8 +10,8 @@ public abstract class Model {
     private Color color = (Color) Color.RED;
     public Vector3f[][] edges;
     private final HashMap<String, Color> colors = new HashMap();
-    private Vector3f angle = new Vector3f(0,0,0);
     private Vector3f centre = new Vector3f(0,0,0);
+    protected boolean loaded = false;
     
     public Model() {
         colors.put("red", (Color) Color.RED);
@@ -75,7 +75,7 @@ public abstract class Model {
     }
     
     public void setColor(String[] line) {
-        if (line.length == 1) {
+        if (line.length == 1 && colors.containsKey(line[0])) {
             color = colors.get(line[0]);
         } else {
             color.set(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]));

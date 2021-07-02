@@ -17,9 +17,8 @@ public class Stl extends Model {
             }
             edges = solid.toString().equals("solid") ? loadText(fileName) : loadBytes(fin);
             fin.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            loaded = true;
+        } catch (IOException e) { }
     }
 
     public static Model load(String fileName) {
@@ -45,7 +44,6 @@ public class Stl extends Model {
             }
             fo.close();
         } catch (IOException e) {
-            e.printStackTrace();
             return -1;
         }
         return 0;
@@ -71,15 +69,16 @@ public class Stl extends Model {
         fr.readLine();
         String normal;
         var result = new LinkedList<Vector3f[]>();
-        while(!(normal = fr.readLine()).equals("")) {
+        while(!(normal = fr.readLine()).split(" ")[0].equals("endsolid")) {
             var edge = new Vector3f[4];
-            edge[3] = readTextVector(normal.split(" "), 2);
+            edge[3] = readTextVector(normal.trim().split(" "), 2);
             fr.readLine();
             for (var i = 0; i < 3; i++) {
-                edge[i] = readTextVector(fr.readLine().split(" "), 1);
+                edge[i] = readTextVector(fr.readLine().trim().split(" "), 1);
             }
             fr.readLine();
             fr.readLine();
+            result.add(edge);
         }
         fr.close();
         edges = new Vector3f[result.size()][4];
@@ -105,8 +104,8 @@ public class Stl extends Model {
 
     private Vector3f readTextVector(String[] nums, int n) {
         var x = Float.parseFloat(nums[n]);
-        var y = Float.parseFloat(nums[n]);
-        var z = Float.parseFloat(nums[n]);
+        var y = Float.parseFloat(nums[n+1]);
+        var z = Float.parseFloat(nums[n+2]);
         return new Vector3f(x, y, z);
     }
 

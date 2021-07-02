@@ -5,7 +5,6 @@ import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.*;
 import java.nio.FloatBuffer;
 import java.util.LinkedList;
-import java.util.Stack;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -13,13 +12,19 @@ import org.lwjgl.opengl.DisplayMode;
 public class Viewer extends Thread{
     private boolean isActive = true;
     private final LinkedList<Model> models = new LinkedList<>();
-    public Stack<Model> modelsPublic = new Stack<>();
     private int nSelected = -1;
 
     private FloatBuffer floatBuffer(float... values) {
        FloatBuffer buffer = BufferUtils.createFloatBuffer(Math.max(4, values.length));
        buffer.put(values);
        return buffer.rewind();
+    }
+
+    public void addModel(Model model) {
+        if (model.loaded) {
+            models.add(model);
+            nSelected = models.size() - 1;
+        }
     }
 
     public void removeCurrent() {
@@ -75,10 +80,6 @@ public class Viewer extends Thread{
             Controller.running();
             Display.update();
             Display.sync(75);
-            for (var i = 0; i < modelsPublic.size(); i++) {
-                nSelected = models.size();
-                models.add(modelsPublic.pop());
-            }
         }
         Display.destroy();
     }

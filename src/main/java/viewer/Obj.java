@@ -17,9 +17,8 @@ public class Obj extends Model  {
                 processLine(s, normals, vertexes, indexes);
             }
             collectObj(vertexes, normals, indexes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            loaded = true;
+        } catch (IOException e) { }
     }
 
     public static Model load(String name) {
@@ -97,7 +96,6 @@ public class Obj extends Model  {
             }
             fo.close();
         } catch (IOException e) {
-            e.printStackTrace();
             return -1;
         }
         return 0;

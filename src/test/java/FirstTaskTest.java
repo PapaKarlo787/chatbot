@@ -1,10 +1,11 @@
 import org.junit.Test;
-
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FirstTaskTest {
+    private final String error = "No such command or arguments are wrong!";
+
     @Test
     public void dateTest() {
         var menu = new MainChatBot();
@@ -40,8 +41,8 @@ public class FirstTaskTest {
         io.setMessage("run calc");
         io.setMessage("exit");
         menu.main(new String[] {});
-        assertEquals(io.getMessage(), "No such command or arguments are wrong!");
-        assertEquals(io.getMessage(), null);
+        assertEquals(error, io.getMessage());
+        assertEquals(null, io.getMessage());
     }
 
     @Test
@@ -56,13 +57,26 @@ public class FirstTaskTest {
     }
 
     @Test
-    public void startFormGamesTest() {
+    public void anySpacesTest() {
+        var menu = new MainChatBot();
+        var io = new FakeIo();
+        menu.setIO(io);
+        io.setMessage("games    ");
+        io.setMessage("exit   ");
+        io.setMessage("exit                      ");
+        menu.main(new String[] {});
+        assertEquals(null, io.getMessage());
+    }
+
+    @Test
+    public void startFromGamesTest() {
         var io = new FakeIo();
         var menu = new Games(io);
         io.setMessage("games");
         io.setMessage("exit");
-        io.setMessage("exit");
         menu.main(new String[] {});
+        assertEquals(error, io.getMessage());
+        assertEquals(null, io.getMessage());
     }
 
     @Test

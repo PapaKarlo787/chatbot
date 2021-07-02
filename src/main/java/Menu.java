@@ -11,7 +11,7 @@ public abstract class Menu
         this.commands = new HashMap<>();
         this.helps = new LinkedList<>();
         commands.put("help", s -> help());
-        commands.put("exit", s -> exit++);
+        commands.put("exit", s -> exit = true);
         putCommands();
         putHelps();
         helps.add("help - печать этих строк");
@@ -35,9 +35,13 @@ public abstract class Menu
 
     public void main(String[] args) {
         executor(args);
-        while(exit == 0) {
-            var line = cl.read();
-            executor(line.split(" "));
+        while(!exit) {
+            try {
+                var line = cl.read();
+                executor(line.split(" "));
+            } catch (Exception e) {
+                exit = true;
+            }
         }
         exit();
     }
@@ -48,11 +52,11 @@ public abstract class Menu
         }
     }
 
-    public abstract void exit();
-    public abstract void putCommands();
-    public abstract void putHelps();
-    public double exit;
+    protected abstract void exit();
+    protected abstract void putCommands();
+    protected abstract void putHelps();
+    private boolean exit;
     public Io cl;
-    public final HashMap<String, Consumer<String[]>> commands;
-    public final List<String> helps;
+    protected final HashMap<String, Consumer<String[]>> commands;
+    protected final List<String> helps;
 }

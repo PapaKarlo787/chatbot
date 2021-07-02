@@ -14,5 +14,6 @@ public class Tetrahedron extends Model {
                 edge[i] = new Vector3f(edge[i]);
             edge[3] = getNormal(edge[0], edge[1], edge[2]);
         }
+        loaded = true;
     }
 }

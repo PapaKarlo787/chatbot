@@ -49,7 +49,7 @@ class My3D extends Menu {
 
     private void loadModel(String name) {
         var names = name.split("\\.");
-        viewer.modelsPublic.push(modelLoad.get(names[names.length - 1]).apply(name));
+        viewer.addModel(modelLoad.get(names[names.length - 1]).apply(name));
     }
 
     private void saveScene(String name) {
@@ -61,10 +61,10 @@ class My3D extends Menu {
 
     @Override
     public void putCommands() {
-        commands.put("cube", s -> viewer.modelsPublic.push(new Cube()));
+        commands.put("cube", s -> viewer.addModel(new Cube()));
         commands.put("load", s -> loadModel(String.join(" ", s)));
-        commands.put("tetrahedron", s -> viewer.modelsPublic.push(new Tetrahedron()));
-        commands.put("sphere", s -> viewer.modelsPublic.push(new Sphere()));
+        commands.put("tetrahedron", s -> viewer.addModel(new Tetrahedron()));
+        commands.put("sphere", s -> viewer.addModel(new Sphere()));
         commands.put("next", s -> viewer.incSelection());
         commands.put("prev", s -> viewer.decSelection());
         commands.put("color", s -> viewer.getSelected().setColor(s));

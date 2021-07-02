@@ -24,5 +24,6 @@ public class Cube extends Model {
         edges[9] = rotateEdge(edges[1], 0, -pi, 0);
         edges[10] = rotateEdge(edges[0], 2 * pi, 0, 0);
         edges[11] = rotateEdge(edges[1], 2 * pi, 0, 0);
+        loaded = true;
     }
 }

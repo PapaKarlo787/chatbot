@@ -26,6 +26,7 @@ public class Sphere extends Model {
         reflect(result, new Vector3f(1, 1, -1));
         edges = new Vector3f[result.size()][4];
         result.toArray(edges);
+        loaded = true;
     }
 
     private void reflect(LinkedList<Vector3f[]> result, Vector3f sign) {
